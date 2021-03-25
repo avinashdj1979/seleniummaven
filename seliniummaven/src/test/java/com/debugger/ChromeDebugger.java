@@ -1,4 +1,4 @@
-package com.basics.identifiers;
+package com.debugger;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,18 +16,22 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class XPathWithAxes {
+public class ChromeDebugger {
 WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {
+		//chrome.exe --remote-debugging-port=9014 --user-data-dir="C:\selenium\chrometestprofile"
 		// Get the project root directory using user.dir system property
 		String userDir = System.getProperty("user.dir");
 		//setting Chrome driver executable path or use WebDriverManager class
 		//System.setProperty("webdriver.chrome.driver", userDir+"/src/test/resources/drivers/chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("debuggerAddress", "localhost:9014");
 		WebDriverManager.chromedriver().setup();
 		//Initializing WebDriver
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(options);
+		//driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
@@ -79,6 +84,12 @@ WebDriver driver;
 		newAddressLink.click();
 		
 		Thread.sleep(2000);
+		
+//		WebElement firstName = driver.findElement(By.xpath("//input[@id='address_first_name']"));
+//		firstName.sendKeys("Test");
+		
+//		WebElement newAddress = driver.findElement(By.linkText("New Address"));
+//		newAddress.click();
 		
 		//syntax for axes
 		//tag[@attrib='value']/Axes::tag[@attibute='value']
@@ -159,7 +170,7 @@ WebDriver driver;
 	
 	@AfterClass
 	public void tearDown() {
-		driver.close();
-		driver.quit();
+		//.close();
+		//driver.quit();
 	}
 }

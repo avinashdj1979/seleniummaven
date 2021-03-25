@@ -15,69 +15,67 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class JavaScriptExecutorExample {
-WebDriver driver;
-	
+	WebDriver driver;
+
 	@BeforeClass
 	public void setUp() {
 		// Get the project root directory using user.dir system property
 		String userDir = System.getProperty("user.dir");
-		//setting Chrome driver executable path or use WebDriverManager class
-		//System.setProperty("webdriver.chrome.driver", userDir+"/src/test/resources/drivers/chromedriver.exe");
+		// setting Chrome driver executable path or use WebDriverManager class
+		// System.setProperty("webdriver.chrome.driver",
+		// userDir+"/src/test/resources/drivers/chromedriver.exe");
 		WebDriverManager.chromedriver().setup();
-		//Initializing WebDriver
+		// Initializing WebDriver
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
-	
+
 	@Test
-	public void jsExecutor() throws InterruptedException  {
+	public void jsExecutor() throws InterruptedException {
 
 		driver.get("http://a.testaddressbook.com/");
-		
+
+		WebElement signInLink = driver.findElement(By.id("sign-in"));
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", signInLink);
 
-		WebElement home = driver.findElement(By.xpath("//a[contains(text(),'Home')]"));
-		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
-		Thread.sleep(2000);//
+		WebElement email = driver.findElement(By.xpath("//input[@class ='form-control']"));
 
-		js.executeScript("arguments[0].classList.remove(\"active\");", home);
-		
-		Thread.sleep(2000);
-		
-		js.executeScript("arguments[0].classList.add(\"active\");", signIn);
-		js.executeScript("arguments[0].click();", signIn);
-		
+		WebElement password = driver.findElement(By.xpath("//input[@id='session_password']"));
+
+		js.executeScript("arguments[0].value='avinash.vcentry@gmail.com';", email);
+
+		js.executeScript("arguments[0].value='vcentry2021';", password);
+
+		WebElement submit = driver.findElement(By.name("commit"));
+
+		js.executeScript("arguments[0].click();", submit);
+
 		Thread.sleep(5000);
 
-		
+		WebElement addressesLink = driver.findElement(By.xpath("//a[contains(text(),'Addresses')]"));
+		addressesLink.click();
 
-		//Tag Attribute value trio
-		//tagName[@atrib='value']
-		//$x("//input[@class='form-control']")
-		WebElement email = driver.findElement(By.xpath("//input[@class ='form-control']"));
-		//email.sendKeys("avinash.vcentry@gmail.com");
-		js.executeScript("arguments[0].value='avinash.vcentry@gmail.com';", email);
-		
-		Thread.sleep(2000);
+		WebElement newAddressLink = driver.findElement(By.xpath("//a[starts-with(@href,'/addresses/n')]"));
+		newAddressLink.click();
 
-		//Mutliple tags with attribute and Values
-		WebElement password = driver.findElement(By.xpath("//input[@type='password'][@name='session[password]']"));
-		//WebElement password = driver.findElement(By.xpath("//input[@id='session_password']"));
-		//password.sendKeys("vcentry2021");
-		js.executeScript("arguments[0].value='vcentry2021';", password);
-		Thread.sleep(2000);
-		
-		//Contains
-		WebElement signInButton= driver.findElement(By.xpath("//input[contains(@class,'btn-primary')]"));
-		//signInButton.click();
-		
+		js.executeScript("window.scrollBy(0,700);");
+		Thread.sleep(5000);
 
-		js.executeScript("arguments[0].click();", signInButton);
-		
+		js.executeScript("window.scrollBy(0,-700);");
+		Thread.sleep(5000);
+
+		WebElement notes = driver.findElement(By.id("address_note"));
+
+		js.executeScript("arguments[0].scrollIntoView();", notes);
+
+		js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", notes);
+
 		Thread.sleep(5000);
 	}
-	
+
 	@AfterClass
 	public void tearDown() {
 		driver.close();

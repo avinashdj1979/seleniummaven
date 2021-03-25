@@ -31,16 +31,16 @@ WebDriver driver;
 		driver.get("http://a.testaddressbook.com/");
 
 		//Absolute CSS
-		WebElement signIn = driver.findElement(By.cssSelector("html>body>nav>div>div>a:nth-child(2)"));
-		signIn.click();
+//		WebElement signIn = driver.findElement(By.cssSelector("html>body>nav>div>div>a:nth-child(2)"));
+//		signIn.click();
 		
 		// not cotiaining a specific class
-		//WebElement signIn = driver.findElement(By.cssSelector("a.nav-item.nav-link:not(.active)"));
-		//signIn.click();
+		WebElement signIn = driver.findElement(By.cssSelector("a.nav-item.nav-link:not(.active)"));
+		signIn.click();
 		
 		//Absolute CSS - 
 		//Start from anywhere in HTML DOM and skip the elements in the middle
-		WebElement subTitle = driver.findElement(By.cssSelector("body div h2"));
+		WebElement subTitle = driver.findElement(By.cssSelector("body h2"));
 		Assert.assertEquals(subTitle.getText(), "Sign in");
 		
 		//Tag and className

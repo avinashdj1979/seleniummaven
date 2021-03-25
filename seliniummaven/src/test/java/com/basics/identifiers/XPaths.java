@@ -1,5 +1,6 @@
 package com.basics.identifiers;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -26,7 +27,6 @@ WebDriver driver;
 		//Initializing WebDriver
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -36,9 +36,16 @@ WebDriver driver;
 
 		//Absolute Path
 		//Start with a single slash to start from the root of the DOM
-		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
+//		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
+//		signIn.click();
+		
+//		List<WebElement> aLists = driver.findElements(By.xpath("/html/body/nav/div/div[1]/a"));
+//		aLists.get(1).click();
+		
+		//WebElement signIn = driver.findElement(By.xpath("(/html/body/nav/div/div[1]/a)[2]"));
+		WebElement signIn = driver.findElement(By.xpath("//a[#'sign-in']"));
 		signIn.click();
-
+		
 		//Absolute Path
 		//Start from anywhere in HTML DOM and skip the elements in the middle
 		///html/body/div/div/h2
@@ -56,8 +63,9 @@ WebDriver driver;
 		Thread.sleep(2000);
 
 		//Mutliple tags with attribute and Values
-		WebElement password = driver.findElement(By.xpath("//input[@type='password'][@name='session[password]']"));
+		//WebElement password = driver.findElement(By.xpath("//input[@type='password'][@name='session[password]']"));
 		//WebElement password = driver.findElement(By.xpath("//input[@id='session_password']"));
+		WebElement password = driver.findElement(By.xpath("(//input[@class='form-control'])[2]"));
 		password.sendKeys("vcentry2021");
 
 		Thread.sleep(2000);
