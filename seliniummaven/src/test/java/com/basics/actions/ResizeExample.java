@@ -39,7 +39,7 @@ public class ResizeExample {
 	@Test
 	public void resizeExamples() throws InterruptedException {
 		
-		driver.get("http://djangovinoth.pythonanywhere.com/login/");
+		/*driver.get("http://djangovinoth.pythonanywhere.com/login/");
 		
 		WebElement login = driver.findElement(By.name("username"));
 		login.sendKeys("avinashdj");
@@ -56,7 +56,10 @@ public class ResizeExample {
 		WebElement labPractice = driver.findElement(By.linkText("Lab Practice"));
 		labPractice.click();
 		
-		Thread.sleep(5000);
+		Thread.sleep(5000);*/
+		
+		NavigateToPages np = new NavigateToPages();
+		np.navigateToActionPages(driver);
 		
 		WebElement actionsLink = driver.findElement(By.partialLinkText("Actions"));
 		actionsLink.click();
