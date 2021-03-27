@@ -36,15 +36,12 @@ WebDriver driver;
 
 		//Absolute Path
 		//Start with a single slash to start from the root of the DOM
-//		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
-//		signIn.click();
+		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
+		signIn.click();
 		
 //		List<WebElement> aLists = driver.findElements(By.xpath("/html/body/nav/div/div[1]/a"));
 //		aLists.get(1).click();
-		
-		//WebElement signIn = driver.findElement(By.xpath("(/html/body/nav/div/div[1]/a)[2]"));
-		WebElement signIn = driver.findElement(By.xpath("//a[#'sign-in']"));
-		signIn.click();
+
 		
 		//Absolute Path
 		//Start from anywhere in HTML DOM and skip the elements in the middle
