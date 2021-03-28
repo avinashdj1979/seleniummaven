@@ -20,18 +20,14 @@ public class ChromeDebugger {
 WebDriver driver;
 	
 	@BeforeClass
-	public void setUp() {
-		//chrome.exe --remote-debugging-port=9014 --user-data-dir="C:\selenium\chrometestprofile"
-		// Get the project root directory using user.dir system property
-		String userDir = System.getProperty("user.dir");
-		//setting Chrome driver executable path or use WebDriverManager class
-		//System.setProperty("webdriver.chrome.driver", userDir+"/src/test/resources/drivers/chromedriver.exe");
+	public void setUp() {		
+		//chrome.exe --remote-debugging-port=9014 --user-data-dir="C:\selenium\chrometestprofile
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("debuggerAddress", "localhost:9014");
 		WebDriverManager.chromedriver().setup();
 		//Initializing WebDriver
 		driver = new ChromeDriver(options);
-		//driver = new ChromeDriver();
+		//driver = new ChromeDriver();  // without options.
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 	}
