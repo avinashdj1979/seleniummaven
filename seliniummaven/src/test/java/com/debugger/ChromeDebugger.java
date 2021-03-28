@@ -21,7 +21,7 @@ WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {		
-		//chrome.exe --remote-debugging-port=9014 --user-data-dir="C:\selenium\chrometestprofile
+		//chrome.exe --remote-debugging-port=9014 --user-data-dir="C:\selenium\chrometestprofile"
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("debuggerAddress", "localhost:9014");
 		WebDriverManager.chromedriver().setup();
