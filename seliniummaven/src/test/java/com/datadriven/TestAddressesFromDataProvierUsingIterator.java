@@ -32,7 +32,7 @@ WebDriver driver;
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 	
-	@Test(dataProvider = "addressDataProviderUsingIterator" ,  dataProviderClass = AddressDataUsingLinkedList.class)
+	@Test(dataProvider = "addressDataProviderUsingIterator" ,  dataProviderClass = AddressDataUsingIterator.class)
 	public void addAddressFromDataProvider(LinkedList<String> obj) throws InterruptedException  {
 
 		driver.get("http://a.testaddressbook.com/");
