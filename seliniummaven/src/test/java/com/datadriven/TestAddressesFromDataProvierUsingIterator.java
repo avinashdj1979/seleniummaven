@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TestAddressesFromDataProvierUsingList {
+public class TestAddressesFromDataProvierUsingIterator {
 
 WebDriver driver;
 	
@@ -32,8 +32,8 @@ WebDriver driver;
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 	
-	@Test(dataProvider = "addressDataProviderUsingList" ,  dataProviderClass = AddressDataUsingLinkedList.class)
-	public void addAddressFromDataProvider(String testCaseName, String firstName, String lastName) throws InterruptedException  {
+	@Test(dataProvider = "addressDataProviderUsingIterator" ,  dataProviderClass = AddressDataUsingLinkedList.class)
+	public void addAddressFromDataProvider(LinkedList<String> obj) throws InterruptedException  {
 
 		driver.get("http://a.testaddressbook.com/");
 
@@ -70,13 +70,13 @@ WebDriver driver;
 
 		//Chained 
 		WebElement firstNameField = driver.findElement(By.xpath("//div[contains(@class,'form-group row')]//input[@id='address_first_name']"));
-		firstNameField.sendKeys(firstName);
+		firstNameField.sendKeys(obj.get(1));
 
 		Thread.sleep(5000);
 		
 		//Chained 
 		WebElement lastNameField = driver.findElement(By.xpath("//input[@id='address_last_name']"));
-		lastNameField.sendKeys(lastName);
+		lastNameField.sendKeys(obj.get(2));
 
 		Thread.sleep(5000);
 	}

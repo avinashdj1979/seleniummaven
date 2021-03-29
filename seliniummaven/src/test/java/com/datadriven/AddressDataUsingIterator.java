@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.DataProvider;
 
-public class AddressDataUsingLinkedList {
+public class AddressDataUsingIterator {
 
 	Object[][] testData;
 	FileInputStream fis;
@@ -54,7 +54,7 @@ public class AddressDataUsingLinkedList {
 		return addressList;
 	}
 	
-	@DataProvider(name="addressDataProviderUsingList")
+	@DataProvider(name="addressDataProviderUsingIterator")
 	public Iterator<Object> getIteratorOfObjectArray() {
 		LinkedList<LinkedList<String>> addressList = new LinkedList<LinkedList<String>>();
 		try {
@@ -114,7 +114,7 @@ public class AddressDataUsingLinkedList {
 	}
 
 	public static void main(String args[]) {
-		AddressDataUsingLinkedList addressData = new AddressDataUsingLinkedList();
+		AddressDataUsingIterator addressData = new AddressDataUsingIterator();
 		addressData.getAddressData();
 	}
 }
