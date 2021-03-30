@@ -35,6 +35,28 @@ WebDriver driver;
 	@Test(dataProvider = "addressDataProviderUsingList" ,  dataProviderClass = AddressDataUsingLinkedList.class)
 	public void addAddressFromDataProvider(String testCaseName, String firstName, String lastName) throws InterruptedException  {
 
+		navigate();
+		
+		//Chained 
+		WebElement firstNameField = driver.findElement(By.xpath("//div[contains(@class,'form-group row')]//input[@id='address_first_name']"));
+		firstNameField.sendKeys(firstName);
+
+		Thread.sleep(5000);
+		
+		//Chained 
+		WebElement lastNameField = driver.findElement(By.xpath("//input[@id='address_last_name']"));
+		lastNameField.sendKeys(lastName);
+
+		Thread.sleep(5000);
+	}
+	
+	@AfterMethod
+	public void tearDown() {
+		driver.close();
+		driver.quit();
+	}
+	
+	private void navigate() throws InterruptedException {
 		driver.get("http://a.testaddressbook.com/");
 
 		WebElement signIn = driver.findElement(By.xpath("/html/body/nav/div/div[1]/a[2]"));
@@ -67,24 +89,6 @@ WebDriver driver;
 		newAddressLink.click();
 
 		Thread.sleep(2000);
-
-		//Chained 
-		WebElement firstNameField = driver.findElement(By.xpath("//div[contains(@class,'form-group row')]//input[@id='address_first_name']"));
-		firstNameField.sendKeys(firstName);
-
-		Thread.sleep(5000);
-		
-		//Chained 
-		WebElement lastNameField = driver.findElement(By.xpath("//input[@id='address_last_name']"));
-		lastNameField.sendKeys(lastName);
-
-		Thread.sleep(5000);
-	}
-	
-	@AfterMethod
-	public void tearDown() {
-		driver.close();
-		driver.quit();
 	}
 	
 }

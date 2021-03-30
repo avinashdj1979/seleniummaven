@@ -52,6 +52,9 @@ public class AddressDataUsingIterator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Object[]  obArray= addressList.toArray();
+		//addressList.iterator();
+		Arrays.asList(obArray);
 		Iterator<Object> iter= Arrays.asList(addressList.toArray()).iterator();
 		return iter;
 	}

@@ -38,9 +38,11 @@ public class AddressDataUsingLinkedList {
 						LinkedList<String> temp = new LinkedList<String>();
 						contentRow = ri.next();
 						ic = contentRow.cellIterator();
-						if (ic.next().getStringCellValue().equalsIgnoreCase("Yes")) {
+						Cell execute = ic.next();
+						if(execute.getStringCellValue().equalsIgnoreCase("Yes")) {
 							while (ic.hasNext()) {
-								String value = ic.next().getStringCellValue();
+								Cell currentCell = ic.next();
+								String value = currentCell.getStringCellValue();
 								temp.add(value);
 							}
 						}
@@ -52,9 +54,16 @@ public class AddressDataUsingLinkedList {
 			e.printStackTrace();
 		}
 		return addressList;
-	}
+	} 
 	
-	@DataProvider(name="addressDataProviderUsingList")
+	
+	//int[] arr = new int [5];  // {1,2,3,4,5} - 1D Array
+	//int[][] arr1 = new int[5][3]; // 
+	//int[][] arr1 = {{1,2,4}, {2,3,5}, {3,4,6}, {40,50,6}, {69,51,7}} - 2D Array
+	
+	//Object[][] obj;
+	
+	@DataProvider(name = "addressDataProviderUsingList")
 	public Object[][] getAddressData() {
 		LinkedList<LinkedList<String>> addressList = getDataFromExcel();
 		int rowCount = addressList.size();
