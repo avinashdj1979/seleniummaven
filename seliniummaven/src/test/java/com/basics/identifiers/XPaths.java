@@ -1,5 +1,6 @@
 package com.basics.identifiers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +13,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.constants.UIConstants;
+import com.utils.PropertyReader;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class XPaths {
@@ -19,14 +23,14 @@ WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {
-		// Get the project root directory using user.dir system property
-		String userDir = System.getProperty("user.dir");
-		//setting Chrome driver executable path or use WebDriverManager class
-		//System.setProperty("webdriver.chrome.driver", userDir+"/src/test/resources/drivers/chromedriver.exe");
-		WebDriverManager.chromedriver().setup();
-		//Initializing WebDriver
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		String fileName = "/src/test/resources/config/config2.txt";
+		PropertyReader pr = new PropertyReader();
+		HashMap<String,String> properties = pr.getProperties();
+		if(properties.get(UIConstants.BROWSER).equals(UIConstants.CHROME)) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver(); 
+		}
+		driver.manage().timeouts().implicitlyWait(Integer.parseInt(properties.get(UIConstants.IMPLICITLY_WAIT_TIME)), TimeUnit.SECONDS);
 	}
 	
 	@Test

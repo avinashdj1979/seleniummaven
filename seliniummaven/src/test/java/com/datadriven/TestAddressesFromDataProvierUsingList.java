@@ -20,7 +20,7 @@ public class TestAddressesFromDataProvierUsingList {
 
 WebDriver driver;
 	
-	@BeforeMethod
+	@BeforeClass
 	public void setUp() {
 		// Get the project root directory using user.dir system property
 		String userDir = System.getProperty("user.dir");
@@ -43,14 +43,16 @@ WebDriver driver;
 
 		Thread.sleep(5000);
 		
-		//Chained 
 		WebElement lastNameField = driver.findElement(By.xpath("//input[@id='address_last_name']"));
 		lastNameField.sendKeys(lastName);
+		
+		WebElement signOut = driver.findElement(By.linkText("Sign out"));
+		signOut.click();
 
 		Thread.sleep(5000);
 	}
 	
-	@AfterMethod
+	@AfterClass
 	public void tearDown() {
 		driver.close();
 		driver.quit();

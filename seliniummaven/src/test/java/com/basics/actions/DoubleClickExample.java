@@ -1,5 +1,6 @@
 package com.basics.actions;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -16,22 +17,25 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.constants.UIConstants;
+import com.utils.PropertyReader;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DoubleClickExample {
 	WebDriver driver;
 	
 	@BeforeClass
-	public void setUp() {
-		// Get the project root directory using user.dir system property
-		String userDir = System.getProperty("user.dir");
-		// setting Chrome driver executable path or use WebDriverManager class
-		// System.setProperty("webdriver.chrome.driver",
-		// userDir+"/src/test/resources/drivers/chromedriver.exe");
-		WebDriverManager.chromedriver().setup();
-		// Initializing WebDriver
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+	public void setUp() throws IOException {
+		PropertyReader pr = new PropertyReader();
+		String browser = pr.getProperty(UIConstants.BROWSER);
+		if(browser.equals(UIConstants.CHROME)) {
+			WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+		}
+		long waitTime = Long.parseLong(pr.getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
+		System.out.println(waitTime);
+		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 
@@ -54,6 +58,8 @@ public class DoubleClickExample {
 		WebElement skillEnhancmentMenu = driver.findElement(By.id("navbarDropdownMenuLink"));
 		skillEnhancmentMenu.click();
 		
+		Thread.sleep(2000);
+
 		WebElement labPractice = driver.findElement(By.linkText("Lab Practice"));
 		labPractice.click();
 		

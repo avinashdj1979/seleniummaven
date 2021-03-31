@@ -6,8 +6,6 @@ import org.openqa.selenium.WebElement;
 
 public class NavigateToPages {
 	
-	WebDriver driver;
-	
 	public void navigateToActionPages(WebDriver driver) {
 		driver.get("http://djangovinoth.pythonanywhere.com/login/");
 		
@@ -32,7 +30,6 @@ public class NavigateToPages {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
