@@ -3,6 +3,7 @@ package com.basics.actions;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.constants.UIConstants;
+import com.factory.DriverFactory;
+import com.utils.PropertyReader;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -25,7 +28,7 @@ public class DragAndDropExample {
 
 	@BeforeClass
 	public void setUp() throws IOException {
-		Properties prop = new Properties();
+		/*Properties prop = new Properties();
 
 		String userDir = System.getProperty("user.dir");
 		String filePath = userDir + UIConstants.DEFAULT_CONFIG_FILE;
@@ -35,24 +38,30 @@ public class DragAndDropExample {
 
 		FileReader fileReader = new FileReader(file);
 
-		prop.load(fileReader);
+		prop.load(fileReader);*/
+		
+		PropertyReader propertyReader = new PropertyReader();
+		String browser = propertyReader.getProperty(UIConstants.BROWSER);
 
-		String browser = prop.getProperty(UIConstants.BROWSER);
+		//String browser = prop.getProperty(UIConstants.BROWSER);
 
 		System.out.println(browser);
 
-		if (browser.equals(UIConstants.CHROME)) {
+		/*if (browser.equals(UIConstants.CHROME)) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
 		} else if (browser.equals("edge")) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
-		}
+		}*/
+		
+		driver = DriverFactory.getDriver();
+		
+		//HashMap<String, String> propMap = propertyReader.getProperties();
+		//int waitTime = Integer.parseInt(propMap.get(UIConstants.IMPLICITLY_WAIT_TIME));
 
-		// Initializing WebDriver
-
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+		//driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+		//driver.manage().window().maximize();
 	}
 
 	@Test

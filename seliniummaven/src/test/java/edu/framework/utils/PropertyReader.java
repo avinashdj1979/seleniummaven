@@ -1,4 +1,4 @@
-package com.utils;
+package edu.framework.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,6 +57,47 @@ public class PropertyReader {
 		return keyValuePairs;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*public PropertyReader() {
+		String defaultConfigFile = UIConstants.DEFAULT_CONFIG_FILE;
+		prop = new Properties();
+		loadProperties(defaultConfigFile);
+	}
+	
+	public PropertyReader(String fileName) {
+		prop = new Properties();
+		loadProperties(fileName);
+	}*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void loadProperties(String fileName) {
 		try {
 			String fileRoot = System.getProperty("user.dir");
@@ -72,5 +113,19 @@ public class PropertyReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+
+	
+	public HashMap<String, String> getProperties1(){
+		HashMap<String, String> propertiesMap = new HashMap<String, String>();
+		Set<Object> keys = prop.keySet();
+		String value; 
+		for(Object obj: keys) {
+			String key = (String) obj;
+			value = getProperty(key);
+			propertiesMap.put(key, value);
+		}
+		return propertiesMap;
 	}
 }

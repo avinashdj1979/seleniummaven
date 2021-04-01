@@ -16,6 +16,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.factory.DriverFactory;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class RightClickOnButton {
@@ -23,16 +25,7 @@ public class RightClickOnButton {
 	
 	@BeforeClass
 	public void setUp() {
-		// Get the project root directory using user.dir system property
-		String userDir = System.getProperty("user.dir");
-		// setting Chrome driver executable path or use WebDriverManager class
-		// System.setProperty("webdriver.chrome.driver",
-		// userDir+"/src/test/resources/drivers/chromedriver.exe");
-		WebDriverManager.chromedriver().setup();
-		// Initializing WebDriver
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+		driver = DriverFactory.getDriver();
 	}
 
 	@Test
