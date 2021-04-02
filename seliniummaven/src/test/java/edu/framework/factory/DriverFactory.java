@@ -12,17 +12,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.Select;
 
-import com.constants.UIConstants;
 import com.utils.PropertyReader;
 
+import edu.framework.constants.UIConstants;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
 	private static WebDriver driver;
-
+	
 	public static WebDriver getDriver() {
-		String browser = new PropertyReader().getProperty(UIConstants.BROWSER);
+		PropertyReader props = new PropertyReader();
+		String browser = props.getProperty(UIConstants.BROWSER);
 		switch (browser) {
 		case "chrome":
 			WebDriverManager.chromedriver().setup();
@@ -46,8 +47,9 @@ public class DriverFactory {
 		}
 		
 		driver.manage().window().maximize();
-		Integer waitTime = Integer.parseInt(new PropertyReader().getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
+		Integer waitTime = Integer.parseInt(props.getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
 		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
+		driver.get(props.getProperty(UIConstants.BASE_URL));
 		
 		return driver;
 	}
