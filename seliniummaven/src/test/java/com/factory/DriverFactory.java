@@ -26,9 +26,9 @@ public class DriverFactory {
 		switch (browser) {
 		case "chrome":
 			WebDriverManager.chromedriver().setup();
-			//ChromeOptions chromeOptions = new ChromeOptions();
-			//chromeOptions.setAcceptInsecureCerts(true);
-			driver = new ChromeDriver();
+			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.setAcceptInsecureCerts(true);
+			driver = new ChromeDriver(chromeOptions);
 			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
