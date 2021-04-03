@@ -18,13 +18,13 @@ import edu.framework.pageobject.HomePage;
 import edu.framework.reports.ExtentTestManager;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+//@Slf4j
 @Listeners(TestListenerExtent.class)
 public class LogInTest extends BaseTest{
 	
 	WebDriver driver;
 	HomePage homePage;
-	//public static final Logger logger =  LogManager.getLogger(LogInTest.class);
+	public static final Logger logger =  LogManager.getLogger(LogInTest.class);
 	
 	@BeforeClass
 	public void setUp() {
@@ -35,7 +35,7 @@ public class LogInTest extends BaseTest{
 	public void loginTest() {
 		HomePage homePage = new PageProvider(driver).getHomePage();
 		ExtentTestManager.getTest().log(Status.INFO, "Sign In Button Clicked");
-		log.info("Sign In Button Clicked");
+		logger.info("Sign In Button Clicked");
 		homePage.clickSignIn();
 		waitForSeconds(5);
 	}
