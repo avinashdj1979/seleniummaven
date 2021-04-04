@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class NavigateToPages {
+public class NavigateToActions {
 	
 	public void navigateToActionPages(WebDriver driver) {
 		driver.get("http://djangovinoth.pythonanywhere.com/login/");

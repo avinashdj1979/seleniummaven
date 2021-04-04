@@ -37,7 +37,7 @@ public class MouseOverExample {
 	}
 
 	@Test
-	public void mouseOverExample() throws InterruptedException {
+	public void mouseOver() throws InterruptedException {
 		
 		driver.get("http://djangovinoth.pythonanywhere.com/login/");
 		
@@ -61,16 +61,14 @@ public class MouseOverExample {
 		WebElement actionsLink = driver.findElement(By.partialLinkText("Actions"));
 		actionsLink.click();
 		
-		WebElement dragAndDrop = driver.findElement(By.partialLinkText("Drag And Drop"));
-		dragAndDrop.click();
+		WebElement  mouseHover = driver.findElement(By.partialLinkText("Mouse Hover"));
+		mouseHover.click();
 		
-		WebElement draggable = driver.findElement(By.xpath("//div[@id = 'draggable']"));
-		
-		WebElement droppable = driver.findElement(By.xpath("//div[@id = 'droppable']"));
+		WebElement portfolio = driver.findElement(By.xpath("//a[@id = 'id6']"));
 
 		Actions action = new Actions(driver);
 		
-		action.dragAndDrop(draggable, droppable).build().perform();
+		action.moveToElement(portfolio).build().perform();
 
 		Thread.sleep(5000);
 

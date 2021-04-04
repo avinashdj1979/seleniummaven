@@ -58,7 +58,7 @@ public class ResizeExample {
 		
 		Thread.sleep(5000);*/
 		
-		NavigateToPages np = new NavigateToPages();
+		NavigateToActions np = new NavigateToActions();
 		np.navigateToActionPages(driver);
 		
 		WebElement actionsLink = driver.findElement(By.partialLinkText("Actions"));

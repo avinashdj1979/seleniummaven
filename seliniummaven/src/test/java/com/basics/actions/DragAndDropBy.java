@@ -23,7 +23,7 @@ import com.utils.PropertyReader;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class DragAndDropExample {
+public class DragAndDropBy{
 	WebDriver driver;
 
 	@BeforeClass

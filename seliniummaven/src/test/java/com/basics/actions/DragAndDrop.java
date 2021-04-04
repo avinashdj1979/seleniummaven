@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class SliderExample {
+public class DragAndDrop {
 	WebDriver driver;
 	
 	@BeforeClass
@@ -37,7 +37,7 @@ public class SliderExample {
 	}
 
 	@Test
-	public void sliderExample() throws InterruptedException {
+	public void dragAndDrop() throws InterruptedException {
 		
 		driver.get("http://djangovinoth.pythonanywhere.com/login/");
 		
@@ -61,14 +61,16 @@ public class SliderExample {
 		WebElement actionsLink = driver.findElement(By.partialLinkText("Actions"));
 		actionsLink.click();
 		
-		WebElement  mouseHover = driver.findElement(By.partialLinkText("Mouse Hover"));
-		mouseHover.click();
+		WebElement dragAndDrop = driver.findElement(By.partialLinkText("Drag And Drop"));
+		dragAndDrop.click();
 		
-		WebElement portfolio = driver.findElement(By.xpath("//a[@id = 'id6']"));
+		WebElement draggable = driver.findElement(By.xpath("//div[@id = 'draggable']"));
+		
+		WebElement droppable = driver.findElement(By.xpath("//div[@id = 'droppable']"));
 
 		Actions action = new Actions(driver);
 		
-		action.moveToElement(portfolio).build().perform();
+		action.dragAndDrop(draggable, droppable).build().perform();
 
 		Thread.sleep(5000);
 
