@@ -27,3 +27,10 @@ public class MaxSumSubrray {
 	}
 
 }
+
+/*
+Problem statement -
+find the sum of all the contigous sub array and return the greatest of them
+ example - for example say the array is {0, 3, 1, 3, 2} - sub arrays are (0} {3} {1} {3} {2} and {0,3} , { 3,1} {1,3}, {3,2} and  {0, 3, 1}, {3, 1, 3}, {1,3,2} and {0, 3, 1 ,3}. {3, 1, 3, 2} and the array itself - sub array with max sum was  {0, 3, 1, 3, 2}
+Another example - {-1 -6, -7} max sum sub array is {-1} becuase matha sub array ellam {-1}=> -1 , {-6} => -6, {-7} => -7,  {-1, -6} => -7 {-6 -7} +> -13  {-1, -6, -7} -=> -14
+*/
