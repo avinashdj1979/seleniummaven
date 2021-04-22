@@ -10,11 +10,11 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
-import edu.framework.listerners.MyListenerExtent;
-import edu.framework.reports.ExtentTestManager1;
+import edu.framework.listerners.TestListenerExtent;
+import edu.framework.reports.ExtentTestManager;
 import lombok.extern.slf4j.Slf4j;
 
-@Listeners(MyListenerExtent.class)
+@Listeners(TestListenerExtent.class)
 @Slf4j
 public class LoginTestExtent {
 	
@@ -29,20 +29,20 @@ public class LoginTestExtent {
 
 	@Test
 	public void successTest() throws InterruptedException {
-		ExtentTestManager1.getTest().log(Status.INFO, "Success test");
+		ExtentTestManager.getTest().log(Status.INFO, "Success test");
 		log.trace("successTest");
 	}
 	
 	@Test
 	public void failureTest() throws InterruptedException {
-		ExtentTestManager1.getTest().log(Status.WARNING, "Failure test");
+		ExtentTestManager.getTest().log(Status.WARNING, "Failure test");
 		log.debug("failure test");
 		Assert.fail();
 	}
 	
 	@Test
 	public void SkippedTest() throws InterruptedException {
-		ExtentTestManager1.getTest().log(Status.SKIP, "Skipped test");
+		ExtentTestManager.getTest().log(Status.SKIP, "Skipped test");
 		log.debug("Skip test");
 		throw new SkipException("Skipped");
 	}

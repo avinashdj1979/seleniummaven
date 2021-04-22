@@ -1,20 +1,17 @@
 package edu.framework.tests;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import edu.framework.listerners.MyListener;
+import edu.framework.listerners.TestListener;
 import lombok.extern.slf4j.Slf4j;
 
-@Listeners(MyListener.class)
+@Listeners(TestListener.class)
 @Slf4j
 public class LoginTestWithLogger{
 	
