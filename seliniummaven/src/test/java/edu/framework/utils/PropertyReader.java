@@ -28,7 +28,7 @@ public class PropertyReader {
 	
 	public PropertyReader(String filePath) {
 		prop  = new Properties();
-		File file = new File(filePath);
+		File file = new File(userDir + filePath);
 		loadProperties(file);
 	}
 	

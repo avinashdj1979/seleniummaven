@@ -1,7 +1,13 @@
 package edu.framework.listerners;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -17,9 +23,11 @@ import edu.framework.reports.ExtentTestManager;
 
 public class TestListenerExtent implements ITestListener  {
 	ExtentReports extent;
+	WebDriver driver;
 	
 	@Override
 	public void onStart(ITestContext context) {
+		//driver = (WebDriver) context.getAttribute("driver");
 		extent = ExtentManager.getReporter();
 		System.out.println("Test started");
 	}
@@ -46,7 +54,19 @@ public class TestListenerExtent implements ITestListener  {
 	
 	@Override
 	public void onTestSkipped(ITestResult result) {
+		driver = (WebDriver) result.getTestContext().getAttribute("driver");
+		String root = System.getProperty("user.dir");
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File ss = ts.getScreenshotAs(OutputType.FILE);
+		long random = System.currentTimeMillis();
+		String des = root + "//target//screenshots//ss" + random + ".png";
+		try {
+			FileUtils.copyFile(ss, new File(des));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		ExtentTestManager.getTest().fail("Test skipped");
+		ExtentTestManager.getTest().addScreenCaptureFromPath(des);
 		System.out.println("Test Skipped");
 	}
 

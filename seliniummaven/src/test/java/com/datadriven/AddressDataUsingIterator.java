@@ -24,6 +24,7 @@ public class AddressDataUsingIterator {
 	@DataProvider(name="addressDataProviderUsingIterator")
 	public Iterator<Object> getIteratorOfObjectArray() {
 		LinkedList<LinkedList<String>> addressList = new LinkedList<LinkedList<String>>();
+		LinkedList<Object> objList = new LinkedList<Object>();
 		try {
 			fis = new FileInputStream(filePath);
 			addressWB = new XSSFWorkbook(fis);
@@ -45,6 +46,9 @@ public class AddressDataUsingIterator {
 								temp.add(value);
 							}
 						}
+						Object o =  new Object();
+						o = (Object) temp;
+						objList.add(o);
 						addressList.add(temp);
 					}
 				}
@@ -52,10 +56,6 @@ public class AddressDataUsingIterator {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Object[]  obArray= addressList.toArray();
-		//addressList.iterator();
-		Arrays.asList(obArray);
-		Iterator<Object> iter= Arrays.asList(addressList.toArray()).iterator();
-		return iter;
+		return objList.iterator();
 	}
 }
