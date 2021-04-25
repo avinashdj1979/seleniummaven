@@ -27,7 +27,6 @@ public class TestListenerExtent implements ITestListener  {
 	
 	@Override
 	public void onStart(ITestContext context) {
-		//driver = (WebDriver) context.getAttribute("driver");
 		extent = ExtentManager.getReporter();
 		System.out.println("Test started");
 	}
@@ -41,8 +40,20 @@ public class TestListenerExtent implements ITestListener  {
 	}
 	
 	@Override
-	public void onTestSuccess(ITestResult result) {
+	public void onTestSuccess(ITestResult result){
+		driver = (WebDriver) result.getTestContext().getAttribute("driver");
 		ExtentTestManager.getTest().pass("Test passed");
+		String root = System.getProperty("user.dir");
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File ss = ts.getScreenshotAs(OutputType.FILE);
+		long random = System.currentTimeMillis();
+		String des = root + "//target//screenshots//ss" + result.getMethod().getMethodName() +random + ".png";
+		try {
+			FileUtils.copyFile(ss, new File(des));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		ExtentTestManager.getTest().addScreenCaptureFromPath(des);
 		System.out.println("Test Success");
 	}
 		
@@ -59,7 +70,7 @@ public class TestListenerExtent implements ITestListener  {
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File ss = ts.getScreenshotAs(OutputType.FILE);
 		long random = System.currentTimeMillis();
-		String des = root + "//target//screenshots//ss" + random + ".png";
+		String des = root + "//target//screenshots//ss" + result.getMethod().getMethodName() +random + ".png";
 		try {
 			FileUtils.copyFile(ss, new File(des));
 		} catch (IOException e) {
@@ -73,7 +84,7 @@ public class TestListenerExtent implements ITestListener  {
 	@Override
 	public void onFinish(ITestContext context) {
 		System.out.println("on Finish");
-		extent.flush();
+		ExtentManager.printResults();
 	}
 	
 }

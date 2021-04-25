@@ -11,12 +11,11 @@ import edu.framework.utils.PropertyReader;
 public class BasePage {
 	
 	WebDriver driver;
-	int waitTime = Integer.parseInt(new PropertyReader().getProperty(UIConstants.EXPLICIT_WAIT_TIME));
 	WebDriverWait wait;
 
 	public BasePage(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, waitTime);
+		wait = new WebDriverWait(driver,15);
 	}
 	
 	public void click(WebElement element) {
@@ -24,4 +23,8 @@ public class BasePage {
 		element.click();
 	}
 	
+	public void type(WebElement element, String value) {
+		wait.until(ExpectedConditions.visibilityOf(element));
+		element.sendKeys(value);
+	}	
 }
