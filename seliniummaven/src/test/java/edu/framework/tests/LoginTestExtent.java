@@ -2,6 +2,7 @@ package edu.framework.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -10,6 +11,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import edu.framework.factory.DriverFactory;
 import edu.framework.listerners.TestListenerExtent;
 import edu.framework.reports.ExtentTestManager;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +24,9 @@ public class LoginTestExtent {
 	//public static final Logger logger = LogManager.getLogger(LoginTest2.class);
 	
 	@BeforeClass
-	public void setUp() {
-		//driver = DriverFactory.getDriver();
-		//driver.get("http://a.testaddressbook.com");
+	public void setUp(ITestContext context) {
+		driver = DriverFactory.getDriver();
+		context.setAttribute("driver", driver);
 	}
 
 	@Test

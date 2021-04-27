@@ -30,23 +30,36 @@ public class DriverFactory {
 			//ChromeOptions chromeOptions = new ChromeOptions();
 			//chromeOptions.setAcceptInsecureCerts(true);
 			driver = new ChromeDriver();
+			driver.manage().window().maximize();
+			break;
+		case "chromeheadless":
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			//
+			options.addArguments("window-size=1920,1080");
+			options.addArguments("start-maximized");
+			//options.addArguments("--headless");
+			options.setHeadless(true);
+			driver = new ChromeDriver(options);
 			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions ffOptions = new FirefoxOptions();
 			ffOptions.setAcceptInsecureCerts(true);
 			driver = new FirefoxDriver(ffOptions);
+			driver.manage().window().maximize();
 			break;
 		case "edge":
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
+			driver.manage().window().maximize();
 			break;
 		default:
 			driver = null;
 			break;
 		}
 		
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		Integer waitTime = Integer.parseInt(props.getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
 		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 		driver.get(props.getProperty(UIConstants.BASE_URL));
