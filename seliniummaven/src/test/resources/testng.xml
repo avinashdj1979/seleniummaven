@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="edu.framework.tests.LogInTestExtent2"/>
+      <class name="edu.framework.tests.LoginTestExtent"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -24,9 +24,9 @@
 						<suiteXmlFiles>
 							<file>src/test/resources/testng.xml</file>
 						</suiteXmlFiles>
-						<includes>
-							<include>LoginTest.java</include> <!-- **/Test*.java-->
-						</includes>
+						<!-- <includes>
+-                         <include>LoginTest.java</include>
+-                       </includes>  -->
 					</configuration>
 				</plugin>
 				<plugin>
