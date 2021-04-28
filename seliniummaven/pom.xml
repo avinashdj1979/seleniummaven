@@ -27,6 +27,7 @@
 						<!-- <includes>
 -                         <include>LoginTest.java</include>
 -                       </includes>  -->
+					<!-- Either use includes or suiteXmlFiles  -->
 					</configuration>
 				</plugin>
 				<plugin>
