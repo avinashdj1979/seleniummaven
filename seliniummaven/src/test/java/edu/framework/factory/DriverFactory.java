@@ -24,6 +24,8 @@ public class DriverFactory {
 	public static WebDriver getDriver() {
 		PropertyReader props = new PropertyReader();
 		String browser = props.getProperty(UIConstants.BROWSER);
+		ChromeOptions chromeOptions;
+
 		switch (browser) {
 		case "chrome":
 			WebDriverManager.chromedriver().setup();
@@ -40,12 +42,12 @@ public class DriverFactory {
 			break;
 		case "chromeheadless":
 			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("window-size=1920,1080");
-			options.addArguments("start-maximized");
+			chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("window-size=1920,1080");
+			chromeOptions.addArguments("start-maximized");
 			//options.addArguments("--headless");
-			options.setHeadless(true);
-			driver = new ChromeDriver(options);
+			chromeOptions.setHeadless(true);
+			driver = new ChromeDriver(chromeOptions);
 			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
