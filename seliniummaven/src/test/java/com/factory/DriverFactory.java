@@ -30,6 +30,12 @@ public class DriverFactory {
 			chromeOptions.setAcceptInsecureCerts(true);
 			driver = new ChromeDriver(chromeOptions);
 			break;
+		case "chromedebug":
+			WebDriverManager.chromedriver().setup();
+			chromeOptions = new ChromeOptions();
+			chromeOptions.setExperimentalOption("debuggerAddress", "localhost:9014");
+			driver = new ChromeDriver(chromeOptions);
+			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions ffOptions = new FirefoxOptions();
