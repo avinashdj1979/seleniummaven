@@ -32,10 +32,15 @@ public class DriverFactory {
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			break;
+		case "chromedebug":
+			WebDriverManager.chromedriver().setup();
+			chromeOptions = new ChromeOptions();
+			chromeOptions.setExperimentalOption("debuggerAddress", "localhost:9014");
+			driver = new ChromeDriver(chromeOptions);
+			break;
 		case "chromeheadless":
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
-			//
 			options.addArguments("window-size=1920,1080");
 			options.addArguments("start-maximized");
 			//options.addArguments("--headless");
