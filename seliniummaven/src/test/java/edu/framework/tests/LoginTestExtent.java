@@ -1,5 +1,9 @@
 package edu.framework.tests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -35,21 +39,21 @@ public class LoginTestExtent {
 		log.trace("successTest");
 	}
 	
-	@Test
+	//@Test
 	public void failureTest() throws InterruptedException {
 		ExtentTestManager.getTest().log(Status.WARNING, "Failure test");
 		log.debug("failure test");
-		Assert.fail();
+		AssertJUnit.fail();
 	}
 	
-	@Test
+	//@Test
 	public void SkippedTest() throws InterruptedException {
 		ExtentTestManager.getTest().log(Status.SKIP, "Skipped test");
 		log.debug("Skip test");
 		throw new SkipException("Skipped");
 	}
 
-	
+
 	@AfterClass
 	public void tearDown() {
 		driver.close();
