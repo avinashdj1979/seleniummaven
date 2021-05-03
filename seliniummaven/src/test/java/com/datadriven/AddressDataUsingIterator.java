@@ -49,8 +49,7 @@ public class AddressDataUsingIterator {
 						Object o =  new Object();
 						o = (Object) temp;
 						objList.add(o);
-						addressList.add(temp);
-					}
+  					}
 				}
 			}
 		} catch (IOException e) {
