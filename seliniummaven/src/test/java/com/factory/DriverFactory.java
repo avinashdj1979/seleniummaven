@@ -3,6 +3,7 @@ package com.factory;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.bcel.generic.SWITCH;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -64,6 +66,29 @@ public class DriverFactory {
 			caps.setCapability("name", "avinash139's Test");
 			try {
 				driver = new RemoteWebDriver(new URL(URL), caps);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "grid":     
+			DesiredCapabilities cap = new DesiredCapabilities();
+			cap.setBrowserName("chrome");
+			cap.setPlatform(Platform.WINDOWS);
+			ChromeOptions opt = new ChromeOptions();
+			opt.setHeadless(true);
+			opt.addArguments("window-size=1920,1080");
+			opt.merge(cap);
+			try {
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), opt);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			break;
+		case "gridwithoptions":     
+			//ChromeOptions chromeopt   = new ChromeOptions();
+			DesiredCapabilities chromecap = DesiredCapabilities.chrome();
+			try {
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromecap);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
