@@ -10,14 +10,22 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import com.constants.UIConstants;
 import com.utils.PropertyReader;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
+	
+	public static final String USERNAME = "avinash139";
+	public static final String AUTOMATE_KEY = "Ehdxz9iyqbZUyFmqvnT2";
+	public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
 	private static WebDriver driver;
 
@@ -27,6 +35,7 @@ public class DriverFactory {
 		case "chrome":
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions chromeOptions = new ChromeOptions();
+			chromeOptions.addArguments("start-maximized");
 			chromeOptions.setAcceptInsecureCerts(true);
 			driver = new ChromeDriver(chromeOptions);
 			break;
@@ -45,6 +54,20 @@ public class DriverFactory {
 			options.setHeadless(true);
 			driver = new ChromeDriver(options);
 			break;
+		case "browserstack":
+			ChromeOptions caps = new ChromeOptions();
+			caps.addArguments("start-maximized");
+			caps.setCapability("os", "Windows");
+			caps.setCapability("os_version", "10");
+			caps.setCapability("browser", "Chrome");
+			caps.setCapability("browser_version", "80");
+			caps.setCapability("name", "avinash139's Test");
+			try {
+				driver = new RemoteWebDriver(new URL(URL), caps);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			break;
 		case "firefox":
 			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions ffOptions = new FirefoxOptions();
@@ -61,7 +84,7 @@ public class DriverFactory {
 		}
 		
 		driver.manage().window().maximize();
-		Integer waitTime = Integer.parseInt(new PropertyReader().getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
+		int waitTime = Integer.parseInt(new PropertyReader().getProperty(UIConstants.IMPLICITLY_WAIT_TIME));
 		driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 		
 		return driver;
