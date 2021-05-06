@@ -1,0 +1,14 @@
+Selenium Grid setup 
+
+
+1. Download Selenium Server Grid vesion 3.141.59 (from selenium.dev/downloads)
+2. Go to command prompt and cd to the downloaded location and run the below command to start the selenium server as hub
+	-  java -jar selenium-server-standalone-3.141.59.jar -role hub (the option role decides whether selenium server is running as node or hub)
+3. open a new command prompt and cd to the location where selenium server is downloaded and run the below command to attach the node to the hub
+	- java -Dwebdriver.chrome.driver="D:/softwares/chromedriver.exe" -jar selenium-server-standalone-3.141.59.jar -role node -hub https://localhost:4444/grid/register
+
+
+To see the browsers available
+http://localhost:4444/grid/console 
+
+
