@@ -8,10 +8,24 @@
 	<name>SeleniumMaven</name>
 	<description>Selenium Maven project</description>
 
-	<!-- <properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-	</properties> -->
+	<!-- <properties> <maven.compiler.source>11</maven.compiler.source> <maven.compiler.target>11</maven.compiler.target> 
+		</properties> -->
+
+	<profiles>
+		<profile>
+			<id>profile1</id>
+			<activation>
+				<property>
+					<name>brand</name>
+					<value>kipling</value>
+				</property>
+			</activation>
+			<properties>
+				<brand_name>kipling</brand_name>
+			</properties>
+		</profile>
+
+	</profiles>
 
 	<build>
 		<pluginManagement>
@@ -22,12 +36,10 @@
 					<version>3.0.0-M5</version>
 					<configuration>
 						<suiteXmlFiles>
-							<file>src/test/resources/testng.xml</file>
+							<file>src/test/resources/${brand_name}/testng.xml</file>
 						</suiteXmlFiles>
-						<!-- <includes>
--                         <include>LoginTest.java</include>
--                       </includes>  -->
-					<!-- Either use includes or suiteXmlFiles  -->
+						<!-- <includes> - <include>LoginTest.java</include> - </includes> -->
+						<!-- Either use includes or suiteXmlFiles -->
 					</configuration>
 				</plugin>
 				<plugin>
@@ -120,6 +132,5 @@
 		</dependency>
 
 	</dependencies>
-
 
 </project>
